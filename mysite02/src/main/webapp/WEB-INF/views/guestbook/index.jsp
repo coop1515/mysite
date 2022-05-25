@@ -1,5 +1,11 @@
+<%@page import="com.douzone.mysite.vo.GuestBookVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%
+  	List<GuestBookVo> list = (List<GuestBookVo>)request.getAttribute("list");
+  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +18,7 @@
 		<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="guestbook">
-				<form action="<%=request.getContextPath() %>/guestbook" method="post">
+				<form action="<%=request.getContextPath() %>/guestbook?a=write" method="post">
 					<input type="hidden" name="a" value="insert">
 					<table>
 						<tr>
@@ -29,21 +35,22 @@
 				</form>
 				<ul>
 					<li>
+					<% int count = 0; for(GuestBookVo vo : list) { %>
 						<table>
 							<tr>
-								<td>[4]</td>
-								<td>안대혁</td>
-								<td>2015-11-10 11:22:30</td>
-								<td><a href="">삭제</a></td>
+								<td><%= list.size() - count%></td>
+								<td><%= vo.getName() %></td>
+								<td><%= vo.getReg_date() %></td>
+								<td><a href="<%=request.getContextPath()%>/guestbook?a=deleteform&no=<%= vo.getNo()%>">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4>
-								안녕하세요. ^^;<br>
-								하하하하	
+								<%= vo.getMessage().replaceAll("\n", "<br/>") %>
 								</td>
 							</tr>
 						</table>
 						<br>
+						<% count++;}  %>
 					</li>
 				</ul>
 			</div>
