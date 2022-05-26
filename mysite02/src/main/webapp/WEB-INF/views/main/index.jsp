@@ -17,6 +17,10 @@
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<h2>안녕하세요. 김현석의  mysite에 오신 것을 환영합니다.</h2>
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<p>
@@ -29,6 +33,11 @@
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					<img id="profile" style="width:130px" src="/mysite02/assets/images/sponge.png">
+					
 				</div>
 			</div>
 		</div>
