@@ -31,7 +31,7 @@ public class UpdateFormAction implements Action {
 		///////////////////////////////////////////////////////////////////
 		
 		UserVo userVo = new UserRepository().findByNo(authUser.getNo());
-		session.setAttribute("userVo", userVo);
+		request.setAttribute("userVo", userVo);
 		
 		WebUtil.forward(request, response, "user/updateform");
 		
