@@ -12,12 +12,11 @@ import com.douzone.mysite.vo.UserVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.WebUtil;
 
-public class UpdateFormAction implements Action {
+public class UpdateAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 접근제어(Access Control)
-		//////////////////////////////////////////////////////////////////////
+		
 		HttpSession session = request.getSession();
 		if(session == null) {
 			WebUtil.redirect(request, response, request.getContextPath());
@@ -28,14 +27,16 @@ public class UpdateFormAction implements Action {
 			WebUtil.redirect(request, response, request.getContextPath());
 			return;
 		}
-		///////////////////////////////////////////////////////////////////
 		
-		UserVo userVo = new UserRepository().findByNo(authUser.getNo());
-		session.setAttribute("userVo", userVo);
+		String name = request.getParameter("name");
+		String password = request.getParameter("password");
+		UserVo vo = new UserVo();
+		vo.setNo(authUser.getNo());
+		vo.setName(name);
+		vo.setPassword(password);
+		new UserRepository().update(vo);
 		
-		WebUtil.forward(request, response, "user/updateform");
-		
-
+		WebUtil.redirect(request, response,request.getContextPath()+"/user?a=updateform");
 	}
 
 }
