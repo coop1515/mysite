@@ -18,7 +18,6 @@ public class LoginAction implements Action {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		
-		System.out.println("ㅇㅇㅇㅇㅇ");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		

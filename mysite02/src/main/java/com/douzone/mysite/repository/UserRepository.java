@@ -188,6 +188,18 @@ public class UserRepository {
 			connection = getConnection();
 
 			// 3. SQL 준비
+			if("".equals(vo.getPassword())) {
+				String sql =
+						" update user " + 
+						" set name=?, gender=?" + 
+						" where no=?";
+				pstmt = connection.prepareStatement(sql);
+				
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getGender());
+				pstmt.setLong(3, vo.getNo());
+			}
+			else {
 			String sql = "update user set name = ?,  password = ?, gender = ? where no = ?";
 			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
 
@@ -196,7 +208,7 @@ public class UserRepository {
 			pstmt.setString(2, vo.getPassword());
 			pstmt.setString(3, vo.getGender());
 			pstmt.setLong(4, vo.getNo());
-
+			}
 			// 4. SQL 실행
 			int count = pstmt.executeUpdate();
 			result = count == 1;
