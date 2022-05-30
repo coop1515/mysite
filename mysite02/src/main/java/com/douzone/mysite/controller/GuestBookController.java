@@ -16,8 +16,9 @@ public class GuestBookController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-
+//		request.setCharacterEncoding("UTF-8");
+//		Encoding filter에서 처리.
+		
 		String actionName = request.getParameter("a");
 		ActionFactory factory = new GuestActionFactory();
 		Action action = factory.getAction(actionName);

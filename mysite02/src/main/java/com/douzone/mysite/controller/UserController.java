@@ -16,7 +16,8 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.setCharacterEncoding("UTF-8");
+//		request.setCharacterEncoding("UTF-8");
+//		Encoding filter에서 처리.
 
 //		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/main/index.jsp");
 //		rd.forward(request, response);
