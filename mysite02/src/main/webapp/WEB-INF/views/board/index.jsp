@@ -33,34 +33,34 @@
 					</tr>			
 					<c:set var='count' value='${fn:length(list) }' />
 					<c:forEach items = '${list }' var ='vo' varStatus='status'>
-					<c:set var ='name' value='${name }'/>
+					<c:choose>
+					<c:when test = "${vo.depth == 1}">
 					<tr>
 						<td>[${count-status.index }]</td>
-						<td style="text-align:left; padding-Left:0px"><a href="${pageContext.request.contextPath }/board?a=view">${vo.title}</a></td>
+						<td style="text-align:left; padding-Left:0px"><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title}</a></td>
 						<td>${vo.name }</td>
 						<td>${vo.hit}</td>
 						<td>${vo.reg_date}</td>
-						<td><a href="" class="del">삭제</a></td>
+						<c:if test = "${vo.user_no == authUser.no }">
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no}" class="del">삭제</a></td>
+						</c:if>
+	
 					</tr>
+					</c:when>
+					<c:otherwise>
+					<tr>
+						<td>[${count-status.index }]</td>
+						<td style="text-align:left; padding-Left:${(vo.depth-1)*10}px"><img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'/><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title}</a></td>
+						<td>${vo.name }</td>
+						<td>${vo.hit}</td>
+						<td>${vo.reg_date}</td>
+						<c:if test = "${vo.user_no == authUser.no }">
+						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no}" class="del">삭제</a></td>
+						</c:if>
+					</tr>
+					</c:otherwise>
+					</c:choose>
 					</c:forEach>
-					<tr>
-						<td>2</td>
-						<td style="text-align:left; padding-Left:10px">
-						<img src= "${pageContext.servletContext.contextPath }/assets/images/reply.png"/><a href="">두 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td style="text-align:left; padding-Left:20px">
-						<img src= "${pageContext.servletContext.contextPath }/assets/images/reply.png"/><a href="">첫 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
 				</table>
 				
 				<!-- pager 추가 -->
@@ -78,8 +78,10 @@
 				<!-- pager 추가 -->
 				
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write" id="new-book">글쓰기</a>
-				</div>				
+				<c:if test = "${not empty authUser}">
+					<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no}" id="new-book">글쓰기</a>
+				</c:if>	
+				</div>		
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp">

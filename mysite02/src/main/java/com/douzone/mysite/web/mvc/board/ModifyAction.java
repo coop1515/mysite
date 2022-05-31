@@ -11,15 +11,21 @@ import com.douzone.mysite.vo.BoardVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.WebUtil;
 
-public class ViewFormAction implements Action {
+public class ModifyAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String title = request.getParameter("title");
+		String contents = request.getParameter("content");		
 		Long no = Long.parseLong(request.getParameter("no"));
-		BoardVo boardVo = new BoardRepository().findByNo(no);
-		request.setAttribute("boardVo", boardVo);
-		new BoardRepository().hit_update(no);
-		WebUtil.forward(request, response, "board/view");
+		
+		BoardVo vo = new BoardVo();
+		vo.setTitle(title);
+		vo.setContents(contents);
+		vo.setNo(no);
+		new BoardRepository().update(vo);
+		
+		WebUtil.redirect(request, response, request.getContextPath()+"/board?a=view&no="+no);
 	}
 
 }
