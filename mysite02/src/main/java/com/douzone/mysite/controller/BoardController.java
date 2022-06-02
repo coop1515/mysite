@@ -7,9 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.douzone.mysite.web.mvc.board.BoardActionFactory;
-import com.douzone.mysite.web.mvc.guest.GuestActionFactory;
 import com.douzone.web.mvc.Action;
-import com.douzone.web.mvc.ActionFactory;
+
 
 
 public class BoardController extends HttpServlet {

@@ -21,7 +21,7 @@ public class DeleteAction implements Action {
 		vo.setNo(no);
 		new BoardRepository().delete(vo);
 		
-		WebUtil.redirect(request, response, request.getContextPath()+"/board?a=index");
+		WebUtil.redirect(request, response, request.getContextPath()+"/board?a=index&i=1");
 
 	}
 

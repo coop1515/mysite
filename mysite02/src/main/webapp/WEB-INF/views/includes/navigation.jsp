@@ -7,6 +7,6 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath }">김현석</a></li>
 		<li><a href="${pageContext.request.contextPath }/guestbook?a=index">방명록</a></li>
-		<li><a href="${pageContext.request.contextPath }/board">게시판</a></li>
+		<li><a href="${pageContext.request.contextPath }/board?i=1">게시판</a></li>
 	</ul>
 </div>

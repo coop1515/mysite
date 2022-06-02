@@ -39,7 +39,7 @@ public class AddAction implements Action {
 		new BoardRepository().insert(vo);
 		
 		System.out.println(no+" "+ user_no);
-		WebUtil.redirect(request, response,request.getContextPath()+"/board?a=index");
+		WebUtil.redirect(request, response,request.getContextPath()+"/board?a=index&i=1");
 		
 		
 	}
