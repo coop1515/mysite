@@ -252,6 +252,41 @@ public class BoardRepository {
 		return result;
 		
 	}
+	public boolean order_update(Long no) {
+		boolean result = false;
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		try {
+			connection = getConnection();
+
+			// 3. SQL 준비
+			
+			String sql = "update board set o_no= o_no+1 where g_no = ? and depth != 1";
+			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
+
+			// 4. Mapping(bind)
+			pstmt.setLong(1, no);
+			
+			// 4. SQL 실행
+			int count = pstmt.executeUpdate();
+			result = count == 1;
+		} catch (SQLException e) {
+			System.out.println("뭐함");
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (connection != null) {
+					connection.close();
+				}
+			} catch (SQLException e) {
+
+			}
+		}
+		return result;
+		
+	}
 	public boolean delete(BoardVo vo) {
 		boolean result = false;
 		Connection connection = null;

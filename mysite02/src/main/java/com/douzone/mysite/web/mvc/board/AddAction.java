@@ -25,12 +25,13 @@ public class AddAction implements Action {
 		
 		} else {
 			vo = new BoardRepository().findByNo(no);
+			new BoardRepository().order_update(vo.getG_no());
 			vo.setG_no(vo.getG_no());
 			vo.setO_no(vo.getO_no()+1);
 			vo.setDepth(vo.getDepth()+1);
 			
-//			System.out.println(vo.getO_no());
-//			System.out.println(vo.getDepth());
+			System.out.println(vo.getO_no());
+			System.out.println(vo.getDepth());
 		}
 		vo.setTitle(title);
 		vo.setContents(contents);

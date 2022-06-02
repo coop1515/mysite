@@ -16,10 +16,16 @@ select max(g_no)+1 from board;
 
 delete from board where no = 2 ;
 
-select no, title, contents, user_no from board where no = 6;
+select no, title, contents, user_no, g_no from board where no = 6;
 
 select * from board a, user b where a.user_no=b.no and a.no = 6;
 
 select a.no, a.title, a.contents, a.user_no, b.no from board a, user b where a.user_no = b.no and a.no = 6;
 
-update board set title = '헤헤', contents = '잘가' where no = 6;
+update board set hit = hit+1 where no = 6;
+
+select * from board where g_no = 6;	
+
+select no, title, contents, user_no, g_no, o_no, depth from board where no = 31;
+
+update board set o_no= o_no+1 where g_no = 31 and depth != 1;
