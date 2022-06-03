@@ -20,7 +20,7 @@ public class AddAction implements Action {
 		Long no = Long.parseLong(request.getParameter("no"));
 		Long user_no = Long.parseLong(request.getParameter("user_no"));
 		BoardVo vo = new BoardVo();
-		System.out.println(vo.getG_no());
+//		System.out.println(vo.getG_no());
 		if(no == user_no) {
 		
 		} else {
@@ -30,15 +30,15 @@ public class AddAction implements Action {
 			vo.setO_no(vo.getO_no()+1);
 			vo.setDepth(vo.getDepth()+1);
 			
-			System.out.println(vo.getO_no());
-			System.out.println(vo.getDepth());
+//			System.out.println(vo.getO_no());
+//			System.out.println(vo.getDepth());
 		}
 		vo.setTitle(title);
 		vo.setContents(contents);
 		vo.setUser_no(user_no);
 		new BoardRepository().insert(vo);
 		
-		System.out.println(no+" "+ user_no);
+//		System.out.println(no+" "+ user_no);
 		WebUtil.redirect(request, response,request.getContextPath()+"/board?a=index&i=1");
 		
 		

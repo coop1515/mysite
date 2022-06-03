@@ -31,12 +31,12 @@ public class LoginAction implements Action {
 			request.setAttribute("email", email);
 			request.setAttribute("result", "fail");
 			WebUtil.forward(request, response, "user/loginform");
-			System.out.println("로그인실패");
+//			System.out.println("로그인실패");
 			return;
 		}
 		
 //		로그인 처리
-		System.out.println("로그인성공");
+//		System.out.println("로그인성공");
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
 		
