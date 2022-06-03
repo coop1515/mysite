@@ -19,12 +19,22 @@ public class SearchAction implements Action {
 		String search = request.getParameter("kwd");
 		Long no = Long.parseLong(request.getParameter("i"));
 		List<BoardVo> list = new BoardRepository().findSearch(search,no);
+		if(no == 1) {
+			
+			list = new BoardRepository().findSearch(search,no-1);
+		}
+		else{
+			
+			list = new BoardRepository().findSearch(search,(no-1)*5);
+		}
+		
+		
 		
 		int length = list.size();
 		request.setAttribute("length", length);
 		request.setAttribute("list", list);
-		System.out.println(list);
-		System.out.println(search);
+//		System.out.println(list);
+//		System.out.println(search);
 		WebUtil.forward(request, response, "board/index");
 
 	}

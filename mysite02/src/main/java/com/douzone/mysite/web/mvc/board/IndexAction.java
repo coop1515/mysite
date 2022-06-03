@@ -25,7 +25,7 @@ public class IndexAction implements Action {
 			
 		}
 		else{
-			list = new BoardRepository().findPage(((no-1)*5));
+			list = new BoardRepository().findPage((no-1)*5);
 		}
 		request.setAttribute("list", list);
 		WebUtil.forward(request, response, "board/index");
