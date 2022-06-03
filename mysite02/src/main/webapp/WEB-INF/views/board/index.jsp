@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath }/board?a=search&i=1" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -32,12 +32,12 @@
 						<th>&nbsp;</th>
 					</tr>
 					<c:set var='count' value='${fn:length(list) }' />
-					
+					<fmt:parseNumber var ='line' integerOnly="true" value = '5'/>
 					<c:forEach items = '${list }' var ='vo' varStatus='status'>
 					<c:set var='board' value='${board }' />
 					<tr>
 					<!-- 	<td>[${count*param.i-status.index }]</td>  -->
-						<td>[${length-((param.i-1)*5)-status.index }]</td>
+						<td>[${length-((param.i-1)*line)-status.index }]</td>
 						<c:choose>
 						<c:when test = "${vo.depth == 1}">
 						<td style="text-align:left; padding-Left:0px"><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title}</a></td>
@@ -59,7 +59,7 @@
 				
 				<!-- pager 추가 -->
 				<div class="pager">
-				<fmt:parseNumber var ='page' integerOnly="true" value = '${length / 5 }'/>
+				<fmt:parseNumber var ='page' integerOnly="true" value = '${length / line }'/>
 					<ul>
 						<c:if test="${param.i > 1 }">
 						<li><a href="${pageContext.request.contextPath }/board?a=index&i=${param.i - 1}">◀</a></li>
