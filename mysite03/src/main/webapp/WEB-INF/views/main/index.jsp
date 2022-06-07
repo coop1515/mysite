@@ -40,7 +40,6 @@
 					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
 					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					
 				</div>
 			</div>
 		</div>
