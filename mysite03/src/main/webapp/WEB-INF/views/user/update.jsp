@@ -16,7 +16,7 @@
 		<div id="content">
 			<div id="user">
 
-				<form id="updateform" name="joinForm" method="POST" action="${pageContext.request.contextPath }/user">
+				<form id="updateform" name="joinForm" method="POST" action="${pageContext.request.contextPath }/user/update">
 					<input type='hidden' name ='a' value='update' />
 					<label class="block-label" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${userVo.name}">
