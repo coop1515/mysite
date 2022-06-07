@@ -1,0 +1,18 @@
+com.douzone.mysite.controller
+com.douzone.mysite.service
+com.douzone.mysite.repository
+com.douzone.mysite.vo
+
+class GuestbookController
+
+RequestMapping("")
+index(){}
+
+(value = "/delete/{no}", method = RequestMethod.Get)
+delete(@PathVariable("no") Long no)
+
+"/delete/{no} POST
+delete(@PathVariable("no") Long no, @RequestParam(value="password", required=true, defaultValue = "") String password )                                    GuestbookVo vo)
+
+"/add" POST
+add(GuestbookVo vo)
