@@ -52,9 +52,8 @@ public class GuestBookController {
 		return "redirect:/guestbook";
 	}
 	
-	@ExceptionHandler(Exception.class)
-	public String handlerException() {
-		return "error/exception";
-	}
-	{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}
+//	@ExceptionHandler(Exception.class)
+//	public String handlerException() {
+//		return "error/exception";
+//	}
 }

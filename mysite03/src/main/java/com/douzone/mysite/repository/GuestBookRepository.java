@@ -78,7 +78,7 @@ public class GuestBookRepository {
 			connection = getConnection();
 
 			// 3. SQL 준비
-			String sql = "insert into guestbook values (null,?,?,?,now())";
+			String sql = "inser into guestbook values (null,?,?,?,now())";
 			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
 
 			// 4. Mapping(bind)
