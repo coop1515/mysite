@@ -21,7 +21,16 @@
         http://www.springframework.org/schema/task/spring-task.xsd">
 
 	<context:annotation-config />
-
+	
+	<!-- Connection Pool DataSource-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.10.45:3306/webdb?charset=utf8" />
+		<property name="username" value="webdb" />
+		<property name="password" value="webdb" />
+	</bean>
+	
+	
 	<context:component-scan
 		base-package="com.douzone.mysite.service, com.douzone.mysite.repository"> 
 		<!-- base-package="com.douzone.mysite">도 가능. 하위를 모두 찾기 때문. -->

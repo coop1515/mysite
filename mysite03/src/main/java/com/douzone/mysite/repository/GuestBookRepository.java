@@ -1,13 +1,15 @@
 package com.douzone.mysite.repository;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.exception.GuestBookRepositoryException;
@@ -17,13 +19,16 @@ import com.douzone.mysite.vo.GuestBookVo;
 @Repository
 public class GuestBookRepository {
 	
+	@Autowired
+	private DataSource dataSource;
+	
 	public List<GuestBookVo> findAll() {
 		List<GuestBookVo> result = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 
 			// 3. SQL 준비
 			String sql = "select no, name, password, message, reg_date from guestbook order by no desc";
@@ -75,10 +80,10 @@ public class GuestBookRepository {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 
 			// 3. SQL 준비
-			String sql = "inser into guestbook values (null,?,?,?,now())";
+			String sql = "insert into guestbook values (null,?,?,?,now())";
 			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
 
 			// 4. Mapping(bind)
@@ -118,7 +123,7 @@ public class GuestBookRepository {
 		Connection connection = null;
 		PreparedStatement pstmt = null;
 		try {
-			connection = getConnection();
+			connection = dataSource.getConnection();
 
 			// 3. SQL 준비
 			String sql = "delete from guestbook where no = ? and password = ?";
@@ -149,18 +154,4 @@ public class GuestBookRepository {
 		return result;
 	}
 
-	private Connection getConnection() throws SQLException {
-		Connection connection = null;
-
-		try {
-			Class.forName("org.mariadb.jdbc.Driver");
-			String url = "jdbc:mysql://192.168.10.45:3306/webdb?charset=utf8";
-			connection = DriverManager.getConnection(url, "webdb", "webdb");
-
-		} catch (ClassNotFoundException e) {
-			System.out.println("Fail Driver loading");
-		}
-
-		return connection;
-	}
 }
