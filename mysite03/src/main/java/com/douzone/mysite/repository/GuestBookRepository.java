@@ -37,7 +37,6 @@ public class GuestBookRepository {
 			// 4. parameter mapping
 
 			// 5. SQL 실행
-
 			rs = pstmt.executeQuery();
 
 			// 6. 결과처리

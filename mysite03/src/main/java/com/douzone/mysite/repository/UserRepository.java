@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,43 +17,13 @@ import com.douzone.mysite.vo.UserVo;
 public class UserRepository {
 	
 	@Autowired
+	private SqlSession sqlSession;
+	
+	@Autowired
 	private DataSource dataSource;
 	
 	public boolean insert(UserVo vo) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = dataSource.getConnection();
-
-			// 3. SQL 준비
-			String sql = "insert into user values (null, ?, ?, ?, ?, now())";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getEmail());
-			pstmt.setString(3, vo.getPassword());
-			pstmt.setString(4, vo.getGender());
-
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
+		return sqlSession.insert("user.insert", vo) == 1;
 	}
 
 	public boolean delete(UserVo vo) {
