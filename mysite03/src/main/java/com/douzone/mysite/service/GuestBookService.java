@@ -9,7 +9,7 @@ import com.douzone.mysite.repository.GuestBookRepository;
 import com.douzone.mysite.vo.GuestBookVo;
 
 @Service
-public class GuestBookSerivce {
+public class GuestBookService {
 	
 	@Autowired
 	private GuestBookRepository guestBookRepository;

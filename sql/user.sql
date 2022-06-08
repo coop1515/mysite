@@ -15,3 +15,5 @@ select no, name, email, gender from user where no = 2;
 
 -- update
 update user set name = '김현석',  password = '1234' where no =2;
+
+select * from guestbook;
