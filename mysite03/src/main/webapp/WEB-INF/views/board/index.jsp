@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }/board?a=index&i=1" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath }/board/index/${vo.page_no+1}" method="post">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -40,17 +40,17 @@
 						<td>[${length-((param.i-1)*line)-status.index }]</td>
 						<c:choose>
 						<c:when test = "${vo.depth == 1}">
-						<td style="text-align:left; padding-Left:0px"><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title}</a></td>
+						<td style="text-align:left; padding-Left:0px"><a href="${pageContext.request.contextPath }/board/view/${vo.no}">${vo.title}</a></td>
 						</c:when>
 						<c:otherwise>
-						<td style="text-align:left; padding-Left:${(vo.depth-1)*10}px"><img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'/><a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">${vo.title}</a></td>
+						<td style="text-align:left; padding-Left:${(vo.depth-1)*10}px"><img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'/><a href="${pageContext.request.contextPath }/board/view/${vo.no}">${vo.title}</a></td>
 						</c:otherwise>
 						</c:choose>
 						<td>${vo.name }</td>
 						<td>${vo.hit}</td>
-						<td>${vo.reg_date}</td>
+						<td>${vo.regDate}</td>
 						<c:if test = "${vo.user_no == authUser.no }">
-						<td><a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no}" class="del">삭제</a></td>
+						<td><a href="${pageContext.request.contextPath }/board/delete/${vo.no}" class="del">삭제</a></td>
 						</c:if>
 	
 					</tr>
@@ -85,7 +85,7 @@
 				
 				<div class="bottom">
 				<c:if test = "${not empty authUser}">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=${authUser.no}" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board/write/${authUser.no}" id="new-book">글쓰기</a>
 				</c:if>	
 				</div>		
 			</div>

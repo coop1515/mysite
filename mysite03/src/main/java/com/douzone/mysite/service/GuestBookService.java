@@ -23,7 +23,7 @@ public class GuestBookService {
 		GuestBookVo vo = new GuestBookVo();
 		vo.setNo(no);
 		vo.setPassword(password);
-		return guestBookRepository.delete(vo);
+		return guestBookRepository.delete(no,password);
 	}
 	
 	public boolean addMessage(GuestBookVo vo) {

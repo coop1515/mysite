@@ -17,7 +17,6 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board" class="board-form">
-			<input type='hidden' name="no" value="${param.no}">
 			<c:set var ='vo' value='${boardVo}'/>
 				<table class="tbl-ex">
 					<tr>
@@ -38,12 +37,12 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?i=1">글목록</a>
+					<a href="${pageContext.request.contextPath }/board">글목록</a>
 					<c:if test = "${vo.user_no == authUser.no}" >
-					<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${vo.no}">글수정</a>
+					<a href="${pageContext.request.contextPath }/board/modify/${vo.no}">글수정</a>
 					</c:if>
 					<c:if test = "${not empty authUser}">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=${vo.no}">답글달기</a>
+					<a href="${pageContext.request.contextPath }/board/write/${vo.no}">답글달기</a>
 					</c:if>
 				</div>
 			</div>

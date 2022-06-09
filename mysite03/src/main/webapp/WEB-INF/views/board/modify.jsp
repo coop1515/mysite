@@ -19,8 +19,7 @@
 			<div id="board">
 
 				<form class="board-form" method="post"
-					action="${pageContext.request.contextPath }/board?a=modify">
-					<input type='hidden' name="no" value="${param.no}">
+					action="${pageContext.request.contextPath }/board/modify/${no}">
 					<c:set var='vo' value='${boardVo}' />
 					<table class="tbl-ex">
 						<tr>
@@ -36,7 +35,7 @@
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no}">취소</a>
+						<a href="${pageContext.request.contextPath }/board/view/${no}">취소</a>
 						<input type="submit" value="수정">
 					</div>
 				</form>
