@@ -41,3 +41,4 @@ where a.user_no = b.no
 	and concat(title,contents) like concat('%','뭐','%')
 order by g_no desc , o_no asc;
 select * from board where contents like '뭐''%';
+
