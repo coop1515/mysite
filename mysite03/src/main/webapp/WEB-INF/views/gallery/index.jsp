@@ -219,14 +219,24 @@ $(function(){
 								class="del-button"
 								title="삭제">삭제</a>
 						</li>
-					
-																																										
-				</ul>	
+					<c:forEach items='${list }' var='vo'>
+						<li>
+							<a	href="${pageContext.request.contextPath }${vo.url }"
+								data-lightbox="gallery"
+								class="image"
+								style="background-image:url('${pageContext.request.contextPath }${vo.url }')">&nbsp;</a>
+								
+							<a	href="${pageContext.request.contextPath }/gallery/delete/${vo.no}"
+								class="del-button"
+								title="삭제">삭제</a>
+						</li>
+					</c:forEach>																															
+				</ul>
 			</div>
 
 			<div id="dialog-upload-form" title="이미지 업로드" style="display:none">
   				<p class="validateTips normal">이미지와 간단한 코멘트를 입력해 주세요.</p>
-  				<form action="${pageContext.request.contextPath }/gallery/upload" 
+  				<form action="${pageContext.request.contextPath }/gallery/upload"
   					  method="post"
   					  enctype="multipart/form-data">
 					<label>코멘트</label>
