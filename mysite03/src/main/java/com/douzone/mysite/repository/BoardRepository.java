@@ -6,14 +6,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.douzone.mysite.vo.BoardVo;
 
 @Repository
 public class BoardRepository {
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	public List<BoardVo> findAll() {
 		List<BoardVo> result = new ArrayList<>();
@@ -81,59 +88,60 @@ public class BoardRepository {
 	}
 	
 	public BoardVo findByNo(Long board_no) {
-		BoardVo result = null;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			String sql = "select no, title, contents, user_no, g_no, o_no, depth from board where no = ?";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-			
-			// 4. parameter mapping
-			pstmt.setLong(1, board_no);
-			// 5. SQL 실행
-
-			rs = pstmt.executeQuery();
-
-			// 6. 결과처리
-			if (rs.next()) {
-				Long no = rs.getLong(1);
-				String title = rs.getString(2);
-				String contents = rs.getString(3);
-				Long user_no = rs.getLong(4);
-				Long g_no = rs.getLong(5);
-				Long o_no = rs.getLong(6);
-				Long depth = rs.getLong(7);
-				result = new BoardVo();
-				result.setNo(no);
-				result.setTitle(title);
-				result.setContents(contents);
-				result.setUser_no(user_no);
-				result.setG_no(g_no);
-				result.setO_no(o_no);
-				result.setDepth(depth);
-			}
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
+//		BoardVo result = null;
+//		Connection connection = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		try {
+//			connection = getConnection();
+//
+//			// 3. SQL 준비
+//			String sql = "select no, title, contents, user_no, g_no, o_no, depth from board where no = ?";
+//			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
+//			
+//			// 4. parameter mapping
+//			pstmt.setLong(1, board_no);
+//			// 5. SQL 실행
+//
+//			rs = pstmt.executeQuery();
+//
+//			// 6. 결과처리
+//			if (rs.next()) {
+//				Long no = rs.getLong(1);
+//				String title = rs.getString(2);
+//				String contents = rs.getString(3);
+//				Long user_no = rs.getLong(4);
+//				Long g_no = rs.getLong(5);
+//				Long o_no = rs.getLong(6);
+//				Long depth = rs.getLong(7);
+//				result = new BoardVo();
+//				result.setNo(no);
+//				result.setTitle(title);
+//				result.setContents(contents);
+//				result.setUser_no(user_no);
+//				result.setG_no(g_no);
+//				result.setO_no(o_no);
+//				result.setDepth(depth);
+//			}
+//		} catch (SQLException e) {
+//			System.out.println("뭐함");
+//		} finally {
+//			try {
+//				if (rs != null) {
+//					rs.close();
+//				}
+//				if (pstmt != null) {
+//					pstmt.close();
+//				}
+//				if (connection != null) {
+//					connection.close();
+//				}
+//			} catch (SQLException e) {
+//
+//			}
+//		}
+//		return result;
+		return sqlSession.selectOne("board.findByNo", board_no);
 	}
 	
 	public List<BoardVo> findPage(Long start_no, String kwd) {
@@ -152,7 +160,7 @@ public class BoardRepository {
 			
 			// 4. parameter mapping
 			pstmt.setLong(1, start_no);
-			// 5. SQL 실행
+			
 			}
 			else {
 				String sql = "select * from board a, user b "
@@ -165,6 +173,7 @@ public class BoardRepository {
 				pstmt.setString(1, kwd);
 				pstmt.setLong(2, start_no);
 			}
+			// 5. SQL 실행
 			rs = pstmt.executeQuery();
 
 			// 6. 결과처리
@@ -213,192 +222,27 @@ public class BoardRepository {
 	}
 	
 	public boolean insert(BoardVo vo) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			if(vo.getG_no() == null) {
-			String sql = "insert into board values (null,?,?,'0',now(),(select max(g_no) from board a)+1,'1','1',?)";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setString(1, vo.getTitle());
-			pstmt.setString(2, vo.getContents());
-			pstmt.setLong(3, vo.getNo());
-			}
-			else {
-				String sql = "insert into board values (null,?,?,'0',now(),?,?,?,?)";
-				pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-				// 4. Mapping(bind)
-				pstmt.setString(1, vo.getTitle());
-				pstmt.setString(2, vo.getContents());
-				pstmt.setLong(3, vo.getG_no());
-				pstmt.setLong(4, vo.getO_no());
-				pstmt.setLong(5, vo.getDepth());
-				pstmt.setLong(6, vo.getUser_no());
-			}
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
+		return sqlSession.insert("board.insert",vo) == 1;
 	}
 	
 	public boolean update(String title, String contents, Long no) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			
-			String sql = "update board set title = ?, contents = ? where no = ?";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setString(1,title);
-			pstmt.setString(2, contents);
-			pstmt.setLong(3, no);
-			
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
+		Map<String, Object> map = new HashMap<>();
+		map.put("title", title);
+		map.put("contents", contents);
+		map.put("no", no);
+		return sqlSession.update("board.update",map) == 1;
 	}
+	
 	public boolean hit_update(Long no) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			
-			String sql = "update board set hit = hit+1 where no = ?";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setLong(1, no);
-			
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
-		
+		return sqlSession.update("board.hit_update",no) == 1;
 	}
+	
 	public boolean order_update(Long no) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			
-			String sql = "update board set o_no= o_no+1 where g_no = ? and depth != 1";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setLong(1, no);
-			
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
-		
+		return sqlSession.update("board.order_update",no) == 1;
 	}
+	
 	public boolean delete(Long no) {
-		boolean result = false;
-		Connection connection = null;
-		PreparedStatement pstmt = null;
-		try {
-			connection = getConnection();
-
-			// 3. SQL 준비
-			String sql = "delete from board where no = ?";
-			pstmt = connection.prepareStatement(sql); // SQL을 실행할 수 있는 객체
-
-			// 4. Mapping(bind)
-			pstmt.setLong(1, no);			
-
-			// 4. SQL 실행
-			int count = pstmt.executeUpdate();
-			result = count == 1;
-		} catch (SQLException e) {
-			System.out.println("뭐함");
-		} finally {
-			try {
-				if (pstmt != null) {
-					pstmt.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-
-			}
-		}
-		return result;
+		return sqlSession.update("board.delete",no) == 1;
 	}
 
 	private Connection getConnection() throws SQLException {
@@ -414,5 +258,10 @@ public class BoardRepository {
 		}
 
 		return connection;
+	}
+
+	public BoardVo totalpage() {
+		
+		return sqlSession.selectOne("board.totalpage");
 	}
 }

@@ -11,7 +11,7 @@ public class BoardVo {
 	private Long depth;
 	private Long user_no;
 	private String name;
-	private int Page_no;
+	private int totalpage;
 	
 	public String getRegDate() {
 		return regDate;
@@ -19,11 +19,12 @@ public class BoardVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public int getPage_no() {
-		return Page_no;
+	
+	public int getTotalpage() {
+		return totalpage;
 	}
-	public void setPage_no(int page_no) {
-		Page_no = page_no;
+	public void setTotalpage(int totalpage) {
+		this.totalpage = totalpage;
 	}
 	public String getName() {
 		return name;
@@ -84,6 +85,6 @@ public class BoardVo {
 	public String toString() {
 		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate="
 				+ regDate + ", g_no=" + g_no + ", o_no=" + o_no + ", depth=" + depth + ", user_no=" + user_no
-				+ ", name=" + name + ", Page_no=" + Page_no + "]";
+				+ ", name=" + name + ", totalpage=" + totalpage + "]";
 	}
 }

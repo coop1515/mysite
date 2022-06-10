@@ -33,9 +33,9 @@ public class FileUploadService {
 			
 			Long fileSize = multipartFile.getSize();
 			
-			System.out.println("###################"+ originFileName);
-			System.out.println("###################"+ restoreFileName);
-			System.out.println("###################"+ fileSize);
+//			System.out.println("###################"+ originFileName);
+//			System.out.println("###################"+ restoreFileName);
+//			System.out.println("###################"+ fileSize);
 			
 			
 			byte[] data = multipartFile.getBytes();
