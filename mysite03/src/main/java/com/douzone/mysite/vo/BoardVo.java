@@ -5,7 +5,7 @@ public class BoardVo {
 	private String title;
 	private String contents;
 	private Long hit;
-	private String regDate;
+	private String reg_date;
 	private Long g_no;
 	private Long o_no;
 	private Long depth;
@@ -13,13 +13,14 @@ public class BoardVo {
 	private String name;
 	private int totalpage;
 	
-	public String getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
-	}
+
 	
+	public String getReg_date() {
+		return reg_date;
+	}
+	public void setReg_date(String reg_date) {
+		this.reg_date = reg_date;
+	}
 	public int getTotalpage() {
 		return totalpage;
 	}
@@ -83,8 +84,8 @@ public class BoardVo {
 	
 	@Override
 	public String toString() {
-		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", regDate="
-				+ regDate + ", g_no=" + g_no + ", o_no=" + o_no + ", depth=" + depth + ", user_no=" + user_no
+		return "BoardVo [no=" + no + ", title=" + title + ", contents=" + contents + ", hit=" + hit + ", reg_date="
+				+ reg_date + ", g_no=" + g_no + ", o_no=" + o_no + ", depth=" + depth + ", user_no=" + user_no
 				+ ", name=" + name + ", totalpage=" + totalpage + "]";
 	}
 }

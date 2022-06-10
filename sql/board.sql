@@ -20,7 +20,7 @@ select max(g_no)+1 from board;
 
 delete from board where no = 2 ;
 
-select no, title, contents, user_no, g_no from board where no = 6;
+select no, title, contents, user_no, g_no from board where no = 1;
 
 select * from board a, user b where a.user_no=b.no and a.no = 6;
 
@@ -42,3 +42,4 @@ where a.user_no = b.no
 order by g_no desc , o_no asc;
 select * from board where contents like '뭐''%';
 
+select count(*) as totalpage, (count(*)/5) as pagecount  from board;

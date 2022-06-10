@@ -14,9 +14,18 @@ public class BoardService {
 	@Autowired
 	private BoardRepository boardRepository;
 	
-	public List<BoardVo> getMessageList() {
-		
-		return boardRepository.findAll();
+	public List<BoardVo> getMessageList(Long no, String kwd) {
+		if(no == null) {
+			no = 1L;
+			return boardRepository.findPage(no-1,kwd);
+		}
+		else
+			if(no == 1) {
+			return boardRepository.findPage(no-1,kwd);
+		}
+		else {
+			return boardRepository.findPage((no-1)*5,kwd);
+		}
 	}
 
 	public BoardVo getViewPage(Long no) {

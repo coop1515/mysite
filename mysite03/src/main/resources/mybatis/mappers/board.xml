@@ -49,4 +49,18 @@
 		select count(*) as totalpage from board
 		]]>
 	</select>
+	
+	<select id="findPage" parameterType = "map" resultType = "boardvo">
+		<choose>
+		<when test="kwd == null">
+		select * from board a, user b where a.user_no = b.no order by g_no desc , o_no asc limit #{start_no},5
+		</when>
+		<otherwise>
+		select * from board a, user b 
+						 where a.user_no = b.no
+							and concat(title,contents) like concat('%',#{kwd},'%') 
+						 order by g_no desc , o_no asc limit #{start_no},5
+		</otherwise>
+	</choose>
+	</select>
 </mapper>
