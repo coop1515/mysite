@@ -4,7 +4,7 @@ desc board;
 
 select * from board;
 
-select * from board a, user b 
+select *, reg_date as regDate from board a, user b 
 where a.user_no = b.no
 order by g_no desc , o_no asc;
 

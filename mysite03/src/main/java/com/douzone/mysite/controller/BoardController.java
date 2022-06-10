@@ -23,18 +23,17 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping({"","/{no}","/{no}/{kwd}"})
+	@RequestMapping({"","/{no}"})
 	public String index(Model model, @PathVariable(value = "no", required = false) Long no,
-			@RequestParam(value = "kwd", required = false) String kwd) {
-//		System.out.println(no);
+			@RequestParam(value = "kwd", required = true, defaultValue = "") String kwd) {
+		
 		List<BoardVo> list = boardService.getMessageList(no,kwd);
 		model.addAttribute("list", list);
-//		System.out.println(boardService.getTotalPage());
 		BoardVo total = boardService.getTotalPage();
-//		System.out.println(total.getTotalpage());
 		model.addAttribute("total", total.getTotalpage());
 		Long pageCount = no;
 		model.addAttribute("pagecount", pageCount);
+		model.addAttribute("kwd",kwd);
 		return "board/index";
 	}
 	

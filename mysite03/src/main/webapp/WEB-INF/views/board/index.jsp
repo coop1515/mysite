@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }/board/${kwd}/${pagecount}" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath }/board/${pagecount}?kwd=${kwd}" method="get">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -58,20 +58,20 @@
 				<div class="pager">
 					<ul>
 						<c:if test="${pagecount > 1}">
-						<li><a href="${pageContext.request.contextPath }/board/${pagecount - 1}">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/board/${pagecount - 1}?kwd=${kwd}">◀</a></li>
 						</c:if>
 						<c:forEach begin = '1' end = '${(total/5) +1 }' step = '1' var = 'i' >
 						<c:choose>
 						<c:when test="${i == pagecount }">
-						<li class = "selected"><a href="${pageContext.request.contextPath }/board/${i}">${i}</a></li>
+						<li class = "selected"><a href="${pageContext.request.contextPath }/board/${i}?kwd=${kwd}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
-						<li><a href="${pageContext.request.contextPath }/board/${i}">${i}</a></li>
+						<li><a href="${pageContext.request.contextPath }/board/${i}?kwd=${kwd}">${i}</a></li>
 						</c:otherwise>
 						</c:choose>
 						</c:forEach>
 						<c:if test="${pagecount <= total/5 }">
-						<li><a href="${pageContext.request.contextPath }/board/${pagecount +1}">▶</a></li>
+						<li><a href="${pageContext.request.contextPath }/board/${pagecount +1}?kwd=${kwd}">▶</a></li>
 						</c:if>
 					</ul>
 				</div>					
