@@ -19,7 +19,10 @@
         http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/task 
         http://www.springframework.org/schema/task/spring-task.xsd">
-
+	
+	<!-- Auto proxy -->
+	<aop:aspectj-autoproxy/>
+	
 	<context:annotation-config />
 	
 	<!-- Connection Pool DataSource-->
@@ -43,7 +46,7 @@
 	
 	
 	<context:component-scan
-		base-package="com.douzone.mysite.service, com.douzone.mysite.repository"> 
+		base-package="com.douzone.mysite.aspect, com.douzone.mysite.service, com.douzone.mysite.repository"> 
 		<!-- base-package="com.douzone.mysite">도 가능. 하위를 모두 찾기 때문. -->
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />

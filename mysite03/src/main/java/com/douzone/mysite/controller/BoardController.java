@@ -22,8 +22,8 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@RequestMapping({"","/index"})
-	public String index(Model model) {
+	@RequestMapping({"","/index","/index/{no}"})
+	public String index(Model model, @PathVariable(value = "no", required = false) Long no) {
 		List<BoardVo> list = boardService.getMessageList();
 		model.addAttribute("list", list);
 		System.out.println(boardService.getTotalPage());

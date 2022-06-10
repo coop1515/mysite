@@ -62,17 +62,15 @@
 				<fmt:parseNumber var ='page' integerOnly="true" value = '${length / line }'/>
 					<ul>
 						<c:if test="${param.i > 1 }">
-						<li><a href="${pageContext.request.contextPath }/board?a=index&i=${param.i - 1}">◀</a></li>
+						<li><a href="${pageContext.request.contextPath }/board/index&i=${param.i - 1}">◀</a></li>
 						</c:if>
 						<c:forEach begin = '1' end = '${page + 1 }' step = '1' var = 'i' >
 						<c:choose>
 						<c:when test="${i == param.i }">
-						<li class = "selected"><a href="${pageContext.request.contextPath }/board?a=index&i=${i}">${i}</a></li>
+						<li class = "selected"><a href="${pageContext.request.contextPath }/board/index&i=${i}">${i}</a></li>
 						</c:when>
 						<c:otherwise>
-						
 						<li><a href="${pageContext.request.contextPath }/board?a=index&i=${i}">${i}</a></li>
-						
 						</c:otherwise>
 						</c:choose>
 						</c:forEach>
