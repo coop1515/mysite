@@ -64,7 +64,7 @@ public class BoardController {
 	@RequestMapping(value = {"/write","/write/{no}"}, method = RequestMethod.POST)
 	public String write(@PathVariable(value = "no", required = false) Long no, BoardVo vo, HttpSession session) {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-		System.out.println(vo);
+//		System.out.println(vo);
 		if(authUser == null) {
 			return "redirect:/";
 		}

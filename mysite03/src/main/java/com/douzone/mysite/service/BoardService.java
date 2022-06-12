@@ -35,9 +35,9 @@ public class BoardService {
 	}
 
 	public boolean addMessage(BoardVo vo, Long no, Long auth_no) {
-		System.out.println(vo);
+//		System.out.println(vo);
 		if (no == null) {
-			System.out.println(" 1 :" + vo);
+//			System.out.println(" 1 :" + vo);
 		} else {
 			BoardVo vo2 = boardRepository.findByNo(no);
 			boardRepository.order_update(vo2.getG_no());
