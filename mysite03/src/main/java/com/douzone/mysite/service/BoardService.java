@@ -63,8 +63,8 @@ public class BoardService {
 		return boardRepository.findByNo(no);
 	}
 
-	public BoardVo getTotalPage() {
-		return boardRepository.totalpage();
+	public BoardVo getTotalPage(String kwd) {
+		return boardRepository.totalpage(kwd);
 
 	}
 }

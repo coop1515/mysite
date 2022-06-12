@@ -45,10 +45,15 @@
 	</select>
 	
 	<select id = "totalpage" resultType = "boardvo">
-		<![CDATA[
-		select count(*) as totalpage from board
-		]]>
-	</select>
+		<choose>
+		<when test='kwd == ""'>
+			select count(*) as totalpage from board
+		</when>
+		<otherwise>
+			select count(*) as totalpage from board where concat(title,contents) like concat('%',#{kwd},'%')
+		</otherwise>
+	</choose>
+		</select>
 	
 	<select id="findPage" parameterType = "map" resultType = "boardvo">
 		<choose>

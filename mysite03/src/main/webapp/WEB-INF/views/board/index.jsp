@@ -17,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }/board/${pagecount}?kwd=${kwd}" method="get">
+				<form id="search_form" action="${pageContext.request.contextPath }/board/1?kwd=${kwd}" method="get">
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -30,7 +30,7 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					
+					<c:set var='count' value='${fn:length(list) }' />
 					<fmt:parseNumber var ='line' integerOnly="true" value = '5'/>
 					<c:forEach items = '${list }' var ='vo' varStatus='status'>
 					<tr>

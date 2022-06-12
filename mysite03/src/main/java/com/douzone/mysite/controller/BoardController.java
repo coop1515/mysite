@@ -29,8 +29,9 @@ public class BoardController {
 		
 		List<BoardVo> list = boardService.getMessageList(no,kwd);
 		model.addAttribute("list", list);
-		BoardVo total = boardService.getTotalPage();
+		BoardVo total = boardService.getTotalPage(kwd);
 		model.addAttribute("total", total.getTotalpage());
+//		System.out.println(list.size());
 		Long pageCount = no;
 		model.addAttribute("pagecount", pageCount);
 		model.addAttribute("kwd",kwd);

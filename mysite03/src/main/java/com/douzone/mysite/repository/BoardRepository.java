@@ -51,8 +51,8 @@ public class BoardRepository {
 		return sqlSession.update("board.delete",no) == 1;
 	}
 
-	public BoardVo totalpage() {
+	public BoardVo totalpage(String kwd) {
 		
-		return sqlSession.selectOne("board.totalpage");
+		return sqlSession.selectOne("board.totalpage",kwd);
 	}
 }
