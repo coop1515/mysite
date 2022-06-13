@@ -42,4 +42,8 @@ where a.user_no = b.no
 order by g_no desc , o_no asc;
 select * from board where contents like '뭐''%';
 
-select count(*) as totalpage, (count(*)/5) as pagecount  from board;
+select count(*) as totalpage from board;
+
+select count(*) as searchpage from board where concat(title,contents) like concat('%','r','%')
+
+   
