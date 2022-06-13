@@ -30,7 +30,6 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					<c:set var='count' value='${fn:length(list) }' />
 					<fmt:parseNumber var ='line' integerOnly="true" value = '5'/>
 					<c:forEach items = '${list }' var ='vo' varStatus='status'>
 					<tr>
