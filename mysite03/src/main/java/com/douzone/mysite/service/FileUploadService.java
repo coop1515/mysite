@@ -19,7 +19,7 @@ public class FileUploadService {
 		String url = null;
 		try {
 			if(multipartFile.isEmpty()) {
-				return url;
+				return null;
 			}
 			
 			File restoreDirectory = new File(RESTORE_PATH);
