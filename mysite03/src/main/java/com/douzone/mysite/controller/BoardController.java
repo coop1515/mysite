@@ -39,7 +39,11 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/delete/{no}")
-	public String delete(@PathVariable("no") Long no) {
+	public String delete(@PathVariable("no") Long no, HttpSession session) {
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
 		boardService.deleteMessage(no);
 		return "redirect:/board/1";
 	}
@@ -64,7 +68,6 @@ public class BoardController {
 	@RequestMapping(value = {"/write","/write/{no}"}, method = RequestMethod.POST)
 	public String write(@PathVariable(value = "no", required = false) Long no, BoardVo vo, HttpSession session) {
 		UserVo authUser = (UserVo)session.getAttribute("authUser");
-//		System.out.println(vo);
 		if(authUser == null) {
 			return "redirect:/";
 		}
@@ -74,6 +77,10 @@ public class BoardController {
 	
 	@RequestMapping(value = "/modify/{no}", method = RequestMethod.GET)
 	public String modify(@PathVariable("no") Long no, Model model, HttpSession session) {
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
 		BoardVo boardVo = boardService.getModifyMessage(no);
 		model.addAttribute("boardVo", boardVo);
 		return "board/modify";
@@ -81,7 +88,11 @@ public class BoardController {
 	
 
 	@RequestMapping(value = "/modify/{no}", method = RequestMethod.POST)
-	public String modify(@PathVariable("no") Long no, String title, String content) {
+	public String modify(@PathVariable("no") Long no, String title, String content, HttpSession session) {
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
 		boardService.modifyMessage(title, content, no);
 		return "redirect:/board/view/{no}";
 	}

@@ -15,19 +15,19 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<org.springframework-version>5.3.18</org.springframework-version>
 	</properties>
-	<dependencies>
 	
+	<dependencies>
 		<!-- Spring Context -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${org.springframework-version}</version>
 			<exclusions>
-	<exclusion>
-	    <groupId>commons-logging</groupId>
-	    <artifactId>commons-logging</artifactId>
-	</exclusion>
-    </exclusions>	
+				<exclusion>
+			    	<groupId>commons-logging</groupId>
+			    	<artifactId>commons-logging</artifactId>
+				</exclusion>
+		    </exclusions>	
 		</dependency>
 		
 		<!-- Spring aspect -->
