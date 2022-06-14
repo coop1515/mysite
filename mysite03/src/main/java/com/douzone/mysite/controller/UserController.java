@@ -29,14 +29,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(@Valid UserVo vo, BindingResult result) {
+	public String join(@Valid UserVo vo, BindingResult result, Model model) {
 //		System.out.println(vo);
 		if(result.hasErrors()) {
 //			List<ObjectError> list = result.getAllErrors();
 //			for(ObjectError error : list) {
 //				System.out.println(error);
 //		}
-//			에러내용 출력
+			
+			model.addAllAttributes(result.getModel());
 			return "/user/join";
 		}
 //		userService.join(vo);

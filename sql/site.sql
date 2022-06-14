@@ -11,3 +11,9 @@ select * from site;
 
 select title, welcome_message as welcomeMessage,
 		  profile_url as profileURL, description from site;
+
+select * from user;
+
+alter table user add column role enum('USER', 'ADMIN') default 'USER' after gender;
+
+insert into user values (null,'아', 'ccaa@naver.com', '1234', 'male',default, now());
