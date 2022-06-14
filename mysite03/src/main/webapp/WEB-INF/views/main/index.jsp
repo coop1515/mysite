@@ -19,14 +19,9 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
+				<c:forEach begin='1' end = '8' step = '1'>
+				<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/${site.profileURL}">
+				</c:forEach>
 					<h2>${site.welcomeMessage }</h2>
 					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/${site.profileURL}">
 					<p>
@@ -35,14 +30,9 @@
 						<br/><br/>
 						<a href="${pageContext.request.contextPath }/guestbook">방명록</a>에 글 남기기<br>						
 					</p>
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
-					<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/assets/images/sponge.png">
+					<c:forEach begin='1' end = '8' step = '1'>
+						<img id="profile" style="width:130px" src="${pageContext.request.contextPath }/${site.profileURL}">
+					</c:forEach>
 				</div>
 			</div>
 		</div>

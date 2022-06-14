@@ -8,4 +8,14 @@
 		]]>
 	</select>
 	
+	<update id = "update" parameterType="sitevo">
+		<choose>
+			<when test='profileURL == null'>
+				update site set title = #{title}, welcome_message = #{welcomeMessage},  description = #{description}
+			</when>
+			<otherwise>
+				update site set title = #{title}, welcome_message = #{welcomeMessage}, profile_url = #{profileURL}, description = #{description}
+			</otherwise>
+		</choose>
+	</update>
 </mapper>

@@ -33,6 +33,11 @@ public class LoginInterceptor implements HandlerInterceptor {
 		System.out.println(authUser);
 		HttpSession session = request.getSession(true);
 		session.setAttribute("authUser", authUser);
+		
+		if(authUser.getRole().equals("ADMIN")) {
+			response.sendRedirect(request.getContextPath()+"/admin");
+			return false;
+		}
 		response.sendRedirect(request.getContextPath());
 		
 		return false;

@@ -27,7 +27,7 @@ public class AdminController {
 	private FileUploadService fileuploadService;
 	
 	
-	@RequestMapping("")
+	@RequestMapping({"","/main"})
 	public String main() {
 		return "admin/main";
 	}
@@ -39,7 +39,7 @@ public class AdminController {
 		
 		String url  = fileuploadService.restore(multipartFile);
 		vo.setProfileURL(url);
-		
+//		System.out.println(url);
 		siteService.updateSite(vo);
 		
 		return "redirect:/admin/main";
