@@ -29,7 +29,8 @@ public class AuthInterceptor implements HandlerInterceptor {
 		// 4. Handler Method에 @Auth가 없으면 Type에 붙어 있는 지 확인.
 		if(auth == null) {
 			// 과제
-			// auth = handlerMethod.
+//			 auth = handlerMethod.getReturnValueType(handlerMethod);
+//			 System.out.println(auth);
 		}
 		
 		

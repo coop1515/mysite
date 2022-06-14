@@ -40,7 +40,7 @@ public class AdminController {
 		String url  = fileuploadService.restore(multipartFile);
 		vo.setProfileURL(url);
 		
-//		siteService.updateSite(vo);
+		siteService.updateSite(vo);
 		
 		return "redirect:/admin/main";
 	}
