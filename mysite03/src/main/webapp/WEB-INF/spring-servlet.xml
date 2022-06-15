@@ -37,7 +37,7 @@
 	</bean>
 	
 	<!-- MVC Resource Mapping -->
-	<mvc:resources mapping="/assets/gallery/**" location="file:d:/mysite-uploads/" />
+	<mvc:resources mapping="/assets/gallery/**" location="file:/mysite-uploads/" />
 	
 	<!-- Multipart Resolver -->
 	<bean id="multipartResolver" 
@@ -47,7 +47,7 @@
 	      <property name="maxUploadSize" value="52428800" />
 	    
 	      <!-- 디스크에 임시 파일을 생성하기 전에 메모리에 보관할수있는 최대 바이트 크기 -->
-	     <property name="maxInMemorySize" value="1024000" />
+	   <!--   <property name="maxInMemorySize" value="1024000" />  -->
 	
 	     <!-- defaultEncoding -->
 	     <property name="defaultEncoding" value="utf-8" />
