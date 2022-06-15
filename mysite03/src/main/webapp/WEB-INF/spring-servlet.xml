@@ -27,9 +27,6 @@
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 	
-	<!-- MVC Resource Mapping -->
-	<mvc:resources mapping="/assets/gallery/**" location="file:d:/mysite-uploads/" />
-	
 	<!-- Message Resource -->
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 	   <property name="basenames">
@@ -38,6 +35,9 @@
 	      </list>
 	   </property>
 	</bean>
+	
+	<!-- MVC Resource Mapping -->
+	<mvc:resources mapping="/assets/gallery/**" location="file:d:/mysite-uploads/" />
 	
 	<!-- Multipart Resolver -->
 	<bean id="multipartResolver" 

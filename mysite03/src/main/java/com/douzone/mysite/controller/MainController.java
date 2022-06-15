@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.douzone.mysite.service.SiteService;
-import com.douzone.mysite.vo.SiteVo;
 
 @Controller
 public class MainController {
@@ -16,8 +15,6 @@ public class MainController {
 	
 	@RequestMapping({"/", "/main"})
 	public String main(Model model) {
-//		SiteVo vo = siteService.getSite();
-//		model.addAttribute("site",vo);
 		return "main/index";
 	}
 }
