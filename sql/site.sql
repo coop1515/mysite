@@ -17,3 +17,5 @@ select * from user;
 alter table user add column role enum('USER', 'ADMIN') default 'USER' after gender;
 
 insert into user values (null,'아', 'ccaa@naver.com', '1234', 'male',default, now());
+
+update site set title = '', welcome_message = '', profile_url = '', description = '';
