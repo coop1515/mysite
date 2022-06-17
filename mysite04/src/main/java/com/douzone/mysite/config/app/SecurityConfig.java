@@ -9,7 +9,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.douzone.mysite.security.AuthInterceptor;
 import com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver;
+import com.douzone.mysite.security.LoginInterceptor;
+import com.douzone.mysite.security.LogoutInterceptor;
 
 @Configuration
 public class SecurityConfig implements WebMvcConfigurer {
@@ -28,17 +31,17 @@ public class SecurityConfig implements WebMvcConfigurer {
 	// Security Interceptor
 	@Bean
 	public HandlerInterceptor loginInterceptor() {
-		return loginInterceptor();
+		return new LoginInterceptor();
 	}
 	
 	@Bean
 	public HandlerInterceptor logoutInterceptor() {
-		return logoutInterceptor();
+		return new LogoutInterceptor();
 	}
 	
 	@Bean
 	public HandlerInterceptor authInterceptor() {
-		return authInterceptor();
+		return new AuthInterceptor();
 	}
 	
 	@Override

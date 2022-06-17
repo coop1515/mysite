@@ -1,6 +1,5 @@
 -- gallery
 
-
 select * from gallery order by no asc; 
 
 insert into gallery values (null, 'fsdgd','하하');
