@@ -2,17 +2,12 @@ package com.douzone.mysite.config;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import com.douzone.mysite.security.AuthInterceptor;
 import com.douzone.mysite.security.AuthUserHandlerMethodArgumentResolver;
 import com.douzone.mysite.security.LoginInterceptor;
@@ -20,11 +15,7 @@ import com.douzone.mysite.security.LogoutInterceptor;
 import com.douzone.mysite.security.SiteInterceptor;
 
 @SpringBootConfiguration
-@PropertySource("classpath:config/WebConfig.properties")
 public class WebConfig implements WebMvcConfigurer {
-	
-	@Autowired
-	private Environment env;
 	
 	// Site Interceptor
 		@Bean
@@ -78,14 +69,4 @@ public class WebConfig implements WebMvcConfigurer {
 		public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 			resolvers.add(handlerMethodArgumentResolver());
 			}
-		
-		@Override
-		public void addResourceHandlers(ResourceHandlerRegistry registry) {
-			registry.addResourceHandler(env.getProperty("fileupload.resourceMapping"))
-			.addResourceLocations("file:" + env.getProperty("fileupload.uploadLocation"));
-			
-			registry.addResourceHandler("/assets/**")
-			.addResourceLocations("classpath:/static/");
-		
-		}
 }
