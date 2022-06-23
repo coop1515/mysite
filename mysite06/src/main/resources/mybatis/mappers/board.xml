@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	
+	<delete id = "delete" parameterType="long">
+		<![CDATA[
+		delete from board where no = #{no}
+		]]>
+	</delete>
+	
+	<insert id ="insert" parameterType="boardvo">
+	<choose>
+		<when test="g_no== null">
+		insert into board values (null,#{title},#{contents},'0',now(),(select max(g_no) from board a)+1,'1','1',#{user_no})
+		</when>
+		<otherwise>
+		insert into board values (null,#{title},#{contents},'0',now(),#{g_no},#{o_no},#{depth},#{user_no})
+		</otherwise>
+	</choose>
+	</insert>
+	
+	<update id = "hit_update" parameterType="long">
+		<![CDATA[
+		update board set hit = hit+1 where no = #{no}
+		]]>
+	</update>
+	
+	<update id = "order_update" parameterType="long">
+		<![CDATA[
+		update board set o_no= o_no+1 where g_no = #{no} and depth != 1
+		]]>
+	</update>
+	
+	<update id = "update" parameterType="map">
+		<![CDATA[
+		update board set title = #{title}, contents = #{contents} where no = #{no}
+		]]>
+	</update>
+	
+	<select id = "findByNo" parameterType = "long" resultType = "boardvo">
+		<![CDATA[
+		select no, title, contents, user_no, g_no, o_no, depth from board where no = #{no}
+		]]>
+	</select>
+	
+	<select id = "totalpage" resultType = "boardvo">
+		<choose>
+		<when test='kwd == ""'>
+			select count(*) as totalpage from board
+		</when>
+		<otherwise>
+			select count(*) as totalpage from board where concat(title,contents) like concat('%',#{kwd},'%')
+		</otherwise>
+	</choose>
+		</select>
+	
+	<select id="findPage" parameterType = "map" resultType = "boardvo">
+		<choose>
+		<when test='kwd == ""'>
+		select * from board a, user b where a.user_no = b.no order by g_no desc , o_no asc limit #{start_no},5
+		</when>
+		<otherwise>
+		select * from board a, user b 
+						 where a.user_no = b.no
+							and concat(title,contents) like concat('%',#{kwd},'%') 
+						 order by g_no desc , o_no asc limit #{start_no},5
+		</otherwise>
+	</choose>
+	</select>
+</mapper>
