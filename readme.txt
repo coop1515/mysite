@@ -29,8 +29,5 @@
 ### mysite07
 1 Spring Boot, Spring MVC(Restful API, Backend), react(JS, Frontend)
 2 auto configuration + 미세설정[application.properties(application.yml)] 
-<<<<<<< HEAD
 3 jar 패키징(jar 배포)
-=======
-3 jar 패키징(jar 배포)
->>>>>>> 34685d163f25e96a2f4bb57538cec9b2f73dd201
+
