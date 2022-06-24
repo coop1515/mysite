@@ -71,7 +71,7 @@ loggin:
    file:
       name: /${spring.application.name}-logs/exception.log
    level:
-      root: DEBUG
+      root: INFO
       com:
          douzone:
             mysite:
