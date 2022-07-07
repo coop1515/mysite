@@ -12,41 +12,77 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath }/assets/css/user.css" rel="stylesheet" type="text/css">
 <script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css">
 <script>
+var messageBox = function(title, message, callback){
+	$("#dialog-message p").text(message);
+	$("#dialog-message")
+		.attr("title", title)
+		.dialog({
+			width: 340,
+			modal: true,
+			buttons: {
+				"확인": function(){
+					$(this).dialog('close');
+				}
+			},
+			close: callback
+			//close: function(){
+			//	 callback && callback();
+			//},
+		});
+	
+}
+
 $(function(){
 	$("#join-form").submit(function(event){
 		event.preventDefault();
 		
 		// 1. 이름 유효성(empty) 체크
 		if($("#name").val() === ''){
-			alert("이름이 비어 있습니다.");
-			$("#name").focus();
+			// $("#dialog-message").dialog();
+			messageBox("회원가입", "이름이 비어 있습니다.", function(){
+				$("#name").focus();
+			});
 			return;
 		}
 		
 		// 2. 이메일 유효성(empty) 체크
 		if($("#email").val() === ''){
-			alert("이메일이 비어 있습니다.");
-			$("#email").focus();
+			//alert("이메일이 비어 있습니다.");
+			//$("#email").focus();
+			messageBox("회원가입", "이메일이 비어 있습니다.", function(){
+				$("#email").focus();
+			});
 			return;
 		}
 		
 		// 3. 이메일 중복 체크 유무
 		if(!$("#img-checkemail").is(":visible")){
-			alert("이메일 중복을 확인해 주세요.");
+			// alert("이메일 중복을 확인해 주세요.");
+			messageBox("회원가입", "이메일 중복을 확인해 주세요.", function(){
+				$("#btn-checkemail").focus();
+			});
 			return;
 		}
 		
 		// 4. 비밀번호 유효성(empty) 체크
 		if($("#password").val() === ''){
-			alert("비밀번호가 비어 있습니다.");
-			$("#password").focus();
+			//alert("비밀번호가 비어 있습니다.");
+			//$("#password").focus();
+			messageBox("회원가입", "비밀번호가 비어 있습니다.", function(){
+				$("#password").focus();
+			});
 			return;
 		}
 		
 		// 5. 약관 동의
 		if(!$("#agree-prov").is(":checked")){
-			alert("약관에 동의를 해야 합니다.")
+			// alert("약관에 동의를 해야 합니다.")
+			messageBox("회원가입", "약관에 동의를 해야 합니다.", function(){
+				$("#agree-prov").focus();
+			});
 			return;
 		}
 		
@@ -115,7 +151,7 @@ $(function(){
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email"/>
 					<input type="button" id= 'btn-checkemail' value="중복체크">
-					<img id = "img-checkemail" style="width:24px"; vertical-align: bottom; src="${pageContext.request.contextPath}/assets/images/check.png" />
+					<img id="img-checkemail" style="width:24px; vertical-align: bottom; display:none;" src="${pageContext.request.contextPath }/assets/images/check.png" />
 					<spring:hasBindErrors name="userVo">
 						<c:if test='${errors.hasFieldErrors("email") }'>
 							<p style ="text-align:left; padding:0px; color:red;">
@@ -130,8 +166,8 @@ $(function(){
 					</p>
 					<fieldset>
 						<legend>성별</legend>
-						<form:radiobutton path="gender" value="female" label="여" check='${userVo.gender == "female" }'/>
-						<form:radiobutton path="gender" value="male" label="남" check='${userVo.gender == "male" }'/>
+						<form:radiobutton path="gender" value="female" label="여" checked='${userVo.gender == "female" }'/>
+						<form:radiobutton path="gender" value="male" label="남" checked='${userVo.gender == "male" }'/>
 					</fieldset>
 					
 					<fieldset>
@@ -144,6 +180,9 @@ $(function(){
 					
 				</form:form>
 			</div>
+		</div>
+		<div id="dialog-message" title="Basic dialog" style = "display:none;">
+			  <p style="line-height:60px;"></p>
 		</div>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp"/>
 		<c:import url="/WEB-INF/views/includes/footer.jsp"/>
